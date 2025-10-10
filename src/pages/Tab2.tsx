@@ -1,5 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/react';
 import './Tab2.css';
 
 const Tab2: React.FC = () => {
@@ -7,16 +6,22 @@ const Tab2: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle>Tips</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 2 page" />
+      <IonContent className="ion-padding">
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>Snel en slim: korte tips</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            <ul>
+              <li>Leeg verpakkingen en knijp ze plat — bespaart ruimte in de PMD-bak.</li>
+              <li>Houd etensresten uit plastic en glas — spoel kort na indien nodig.</li>
+              <li>Bewaar batterijen apart en lever ze in bij een inzamelpunt.</li>
+            </ul>
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
