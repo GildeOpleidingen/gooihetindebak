@@ -36,3 +36,13 @@
   background: rgba(0,0,0,0.08);
   transition: width 1s linear;
 }
+
+.quiz-image {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.pause-button {
+  font-size: 0.85rem;
+}

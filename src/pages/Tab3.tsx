@@ -12,6 +12,16 @@ const Tab3: React.FC = () => {
     } catch (e) {
       // ignore
     }
+    const handler = () => {
+      try {
+        const raw = localStorage.getItem('gib_leaderboard');
+        setBoard(raw ? JSON.parse(raw) : []);
+      } catch (e) {
+        setBoard([]);
+      }
+    };
+    window.addEventListener('gib_leaderboard_updated', handler as EventListener);
+    return () => { window.removeEventListener('gib_leaderboard_updated', handler as EventListener); };
   }, []);
 
   const clearBoard = () => {
