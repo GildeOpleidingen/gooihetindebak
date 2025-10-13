@@ -1,0 +1,48 @@
+/* Styles for interactive quiz options */
+.option-item {
+  transition: transform 120ms ease, background 160ms ease;
+}
+.option-item:hover {
+  transform: translateY(-2px);
+}
+.option-item.selected {
+  background: rgba(38,79,63,0.06);
+}
+.option-item.correct {
+  background: rgba(46,204,113,0.08);
+}
+.option-item.wrong {
+  background: rgba(231,76,60,0.06);
+}
+.option-icon {
+  font-size: 1.4rem;
+}
+.option-icon.correct {
+  color: #2ecc71;
+}
+.option-icon.wrong {
+  color: #e74c3c;
+}
+
+.timer-bar {
+  height: 6px;
+  background: linear-gradient(90deg,#2ecc71,#f1c40f,#e74c3c);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.timer-fill {
+  height: 100%;
+  background: rgba(0,0,0,0.08);
+  transition: width 1s linear;
+}
+
+.quiz-image {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.pause-button {
+  font-size: 0.85rem;
+}

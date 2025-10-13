@@ -1,22 +1,57 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonButton } from '@ionic/react';
+import { useEffect, useState } from 'react';
 import './Tab3.css';
 
 const Tab3: React.FC = () => {
+  const [board, setBoard] = useState<Array<{ name: string; points: number; date: string }>>([]);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('gib_leaderboard');
+      if (raw) setBoard(JSON.parse(raw));
+    } catch (e) {
+      // ignore
+    }
+    const handler = () => {
+      try {
+        const raw = localStorage.getItem('gib_leaderboard');
+        setBoard(raw ? JSON.parse(raw) : []);
+      } catch (e) {
+        setBoard([]);
+      }
+    };
+    window.addEventListener('gib_leaderboard_updated', handler as EventListener);
+    return () => { window.removeEventListener('gib_leaderboard_updated', handler as EventListener); };
+  }, []);
+
+  const clearBoard = () => {
+    localStorage.removeItem('gib_leaderboard');
+    setBoard([]);
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 3</IonTitle>
+          <IonTitle>Leaderboard</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+      <IonContent className="ion-padding">
+        <h3>Top spelers</h3>
+        <IonList>
+          {board.length === 0 ? (
+            <IonItem>
+              <IonLabel>Geen scores gevonden — maak eerst een quizrun en sla op.</IonLabel>
+            </IonItem>
+          ) : board.map((entry, idx) => (
+            <IonItem key={idx}>
+              <IonLabel>{idx + 1}. {entry.name} — {entry.points} punten</IonLabel>
+            </IonItem>
+          ))}
+        </IonList>
+        <div style={{ marginTop: 12 }}>
+          <IonButton color="medium" onClick={clearBoard}>Leeg leaderboard</IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );
